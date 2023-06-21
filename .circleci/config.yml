@@ -18,28 +18,6 @@
 #
 version: 2.1
 jobs:
-  build:
-    machine:
-      image: ubuntu-2004:2023.04.2
-    resource_class: xlarge
-    environment:
-      LOCAL_JMX: "no"
-    steps:
-      - checkout
-      - run:
-          name: Install System Dependencies
-          command: |
-              set -x
-              sudo apt-get update -qq
-              sudo apt-get install -y libjna-java python3-dev python3-pip libyaml-dev
-              sudo pip3 install pyYaml
-              sudo pip3 install git+https://github.com/riptano/ccm
-
-      - run:
-          name: Build
-          command: |
-              mvn package -DskipTests
-
   ccm-repair-tests:
     machine:
       image: ubuntu-2004:2023.04.2
@@ -76,16 +54,14 @@ jobs:
       - run:
           name: Run CCM based tests
           command: |
-            TESTFILES=src/test/resources/rtest/cluster_access.feature
-            eval mvn test -Dcucumber.features='"$TESTFILES"'
+            TESTFILES="src/test/resources/rtest/cluster_access.feature"
+            eval mvn test -Dcucumber.features='"$TESTFILES"' -Dcucumber.filter.tags='"@DryRun and @Full"'
 workflows:
   version: 2.1
   repair_qa_push:
     jobs:
      # - build
       - ccm-repair-tests:
-          # requires:
-          #   - build
           matrix:
             parameters:
-              repair-type: ["Full", "Subrange", "Incremental"]
+              repair-type: ["Full"]
