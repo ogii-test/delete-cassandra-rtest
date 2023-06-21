@@ -76,7 +76,6 @@ jobs:
       - run:
           name: Run CCM based tests
           command: |
-             #mvn test -Dcucumber.filter.tags="@${REPAIR_TYPE}"
             TESTFILES=cluster_access.feature
             eval mvn test -Dcucumber.features='"$TESTFILES"'
 workflows:
