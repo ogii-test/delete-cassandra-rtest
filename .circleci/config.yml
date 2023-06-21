@@ -85,7 +85,7 @@ workflows:
       - build
       - ccm-repair-tests:
           requires:
-            - build:
-                matrix:
-                  parameters:
-                    repair-type: ["Full", "Subrange", "Incremental"]
+            - build
+          matrix:
+            parameters:
+              repair-type: ["Full", "Subrange", "Incremental"]
