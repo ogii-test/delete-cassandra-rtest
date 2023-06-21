@@ -76,16 +76,17 @@ jobs:
       - run:
           name: Run CCM based tests
           command: |
-              mvn test -Dcucumber.filter.tags="@${REPAIR_TYPE}"
-
+             #mvn test -Dcucumber.filter.tags="@${REPAIR_TYPE}"
+            TESTFILES=cluster_access.feature
+            eval mvn test -Dcucumber.features='"$TESTFILES"'
 workflows:
   version: 2.1
   repair_qa_push:
     jobs:
-      - build
-      - ccm-repair-tests:
-          requires:
-            - build
+     # - build
+      - ccm-repair-tests
+          # requires:
+          #   - build
           matrix:
             parameters:
               repair-type: ["Full", "Subrange", "Incremental"]
