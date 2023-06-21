@@ -76,7 +76,7 @@ jobs:
       - run:
           name: Run CCM based tests
           command: |
-            TESTFILES=cluster_access.feature
+            TESTFILES=src/test/resources/rtest/cluster_access.feature
             eval mvn test -Dcucumber.features='"$TESTFILES"'
 workflows:
   version: 2.1
