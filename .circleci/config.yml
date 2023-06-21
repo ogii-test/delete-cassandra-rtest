@@ -83,7 +83,7 @@ workflows:
   repair_qa_push:
     jobs:
      # - build
-      - ccm-repair-tests
+      - ccm-repair-tests:
           # requires:
           #   - build
           matrix:
