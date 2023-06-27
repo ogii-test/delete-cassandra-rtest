@@ -58,8 +58,7 @@ jobs:
           name: Run CCM based tests
           command: |
             #TESTFILES="sr/test/resources/rtest/cluster_access.feature"
-            eval mvn test -Dcucumber.features='"$TESTFILES"'
-            # -Dcucumber.filter.tags='"@DryRun and @Full"'
+            eval mvn test -Dcucumber.features='"$TESTFILES"' -Dcucumber.filter.tags='"@DryRun and @Full"'
 workflows:
   version: 2.1
   repair_qa_push:
