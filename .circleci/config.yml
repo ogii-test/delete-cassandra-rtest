@@ -28,24 +28,24 @@ jobs:
       resource-class: xlarge
       tag: 2021.10.1
     parameters:
-       tags:
-          default: "@smoke"
-          type: string
-        parallelNumbers:
-          default: 1
-          type: integer
-        recording_video:
-          default: "false"
-          type: string
-        featureFiles:
-          default: "none"
-          type: string
-        systemImages:
-          default: "system-images;android-30;google_apis_playstore;x86"
-          type: string
-        testFiles:
-          default: "none"
-          type: string
+       # tags:
+       #    default: "@smoke"
+       #    type: string
+       #  parallelNumbers:
+       #    default: 1
+       #    type: integer
+       #  recording_video:
+       #    default: "false"
+       #    type: string
+       #  featureFiles:
+       #    default: "none"
+       #    type: string
+       #  systemImages:
+       #    default: "system-images;android-30;google_apis_playstore;x86"
+       #    type: string
+       #  testFiles:
+       #    default: "none"
+       #    type: string
         repair-type:
           type: string
     environment:
