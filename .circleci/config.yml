@@ -77,7 +77,7 @@ jobs:
       - android/run-tests:
               max-tries: 1
               pre-test-command: eval echo $TESTFILES
-              test-command: eval mvn test -Dcucumber.features="$TESTFILES" -Dcucumber.filter.tags=<< parameters.tags >>
+              test-command: eval mvn test -Dcucumber.features="$TESTFILES" -Dcucumber.filter.tags=\"<< parameters.tags >>\"
               #eval mvn test -Dcucumber.features="$TESTFILES" -Dcucumber.filter.tags="@DryRun and @Full" 
 
       # - run:
