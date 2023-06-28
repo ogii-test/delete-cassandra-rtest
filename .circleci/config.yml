@@ -17,14 +17,37 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2.1
+
+orbs:
+  android: circleci/android@2.3.0
+  
 jobs:
   ccm-repair-tests:
-    machine:
-      image: ubuntu-2004:2023.04.2
-    resource_class: xlarge
+    executor:
+      name: android/android-machine
+      resource-class: xlarge
+      tag: 2021.10.1
     parameters:
-      repair-type:
-        type: string
+       tags:
+          default: "@smoke"
+          type: string
+        parallelNumbers:
+          default: 1
+          type: integer
+        recording_video:
+          default: "false"
+          type: string
+        featureFiles:
+          default: "none"
+          type: string
+        systemImages:
+          default: "system-images;android-30;google_apis_playstore;x86"
+          type: string
+        testFiles:
+          default: "none"
+          type: string
+        repair-type:
+          type: string
     environment:
       REPAIR_TYPE: << parameters.repair-type >>
       LOCAL_JMX: "no"
@@ -44,21 +67,22 @@ jobs:
               . ~/.jabba/jabba.sh && sudo update-alternatives --install /usr/bin/java java ${JAVA_HOME%*/}/bin/java 20000
               . ~/.jabba/jabba.sh && sudo update-alternatives --install /usr/bin/javac javac ${JAVA_HOME%*/}/bin/javac 20000
               sudo pip3 install git+https://github.com/riptano/ccm
-
-      - restore_cache:
-            keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+              
       - run: |
           TESTFILES=src/test/resources/rtest/cluster_access.feature
           echo "export TESTFILES=${TESTFILES}" >> "$BASH_ENV"
 
-      - run:
-          name: Run CCM based tests
-          command: |
-            #TESTFILES="sr/test/resources/rtest/cluster_access.feature"
-            eval mvn test -Dcucumber.features='"$TESTFILES"' -Dcucumber.filter.tags='"@DryRun and @Full"'
+      - android/run-tests:
+              max-tries: 1
+              pre-test-command: eval echo $TESTFILES
+              test-command: eval mvn test -Dcucumber.features='"$TESTFILES"' -Dcucumber.filter.tags='"@DryRun and @Full" 
+
+      # - run:
+      #     name: Run CCM based tests
+      #     command: |
+      #       #TESTFILES="sr/test/resources/rtest/cluster_access.feature"
+      #       eval mvn test -Dcucumber.features='"$TESTFILES"' -Dcucumber.filter.tags='"@DryRun and @Full"'
+            
 workflows:
   version: 2.1
   repair_qa_push:
