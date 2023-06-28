@@ -28,9 +28,9 @@ jobs:
       resource-class: large
       tag: 2022.01.1 #2021.10.1
     parameters:
-       # tags:
-       #    default: "@smoke"
-       #    type: string
+       tags:
+        default: "@DryRun and @Full"
+        type: string
        #  parallelNumbers:
        #    default: 1
        #    type: integer
@@ -80,7 +80,7 @@ jobs:
       - android/run-tests:
               max-tries: 1
               pre-test-command: eval echo $TESTFILES
-              test-command: eval mvn test -Dcucumber.features="$TESTFILES" -Dcucumber.filter.tags="@DryRun and @Full"
+              test-command: eval mvn test -Dcucumber.features="$TESTFILES" -Dcucumber.filter.tags=<< parameters.tags >>
               #eval mvn test -Dcucumber.features="$TESTFILES" -Dcucumber.filter.tags="@DryRun and @Full" 
 
       # - run:
