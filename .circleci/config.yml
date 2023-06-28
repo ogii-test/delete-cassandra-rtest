@@ -54,6 +54,11 @@ jobs:
       MEDUSA_BRANCH: "master"
     steps:
       - checkout
+      - android/create-avd:
+          avd-name: AndroidPhone_Pixel_3a
+          install: true
+          system-image: "system-images;android-30;google_apis_playstore;x86"
+          additional-args: --device 21
       # - run:
       #     name: Install System Dependencies
       #     command: |
