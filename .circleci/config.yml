@@ -46,8 +46,6 @@ jobs:
        #  testFiles:
        #    default: "none"
        #    type: string
-        repair-type:
-          type: string
     environment:
       REPAIR_TYPE: << parameters.repair-type >>
       LOCAL_JMX: "no"
