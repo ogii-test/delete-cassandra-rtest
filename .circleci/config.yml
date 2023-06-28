@@ -47,7 +47,6 @@ jobs:
        #    default: "none"
        #    type: string
     environment:
-      REPAIR_TYPE: << parameters.repair-type >>
       LOCAL_JMX: "no"
       MEDUSA_BRANCH: "master"
     steps:
