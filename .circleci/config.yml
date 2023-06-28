@@ -74,8 +74,8 @@ jobs:
 
       - android/run-tests:
               max-tries: 1
-              pre-test-command: eval echo $TESTFILES
-              test-command: eval mvn test -Dcucumber.features='"$TESTFILES"' -Dcucumber.filter.tags='"@DryRun and @Full" 
+              pre-test-command: echo $TESTFILES
+              test-command: mvn test -Dcucumber.features='"$TESTFILES"' -Dcucumber.filter.tags='"@DryRun and @Full" 
 
       # - run:
       #     name: Run CCM based tests
