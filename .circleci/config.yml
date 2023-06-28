@@ -92,7 +92,4 @@ workflows:
   repair_qa_push:
     jobs:
      # - build
-      - ccm-repair-tests:
-          matrix:
-            parameters:
-              repair-type: ["Full"]
+      - ccm-repair-tests
