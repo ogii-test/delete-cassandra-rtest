@@ -75,6 +75,7 @@ jobs:
           echo "export TESTFILES=${TESTFILES}" >> "$BASH_ENV"
       - run: |
           circleci tests run --command="mvn test"
+          exit 1
 
       # - android/run-tests:
       #         max-tries: 1
