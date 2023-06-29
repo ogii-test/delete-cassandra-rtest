@@ -73,12 +73,14 @@ jobs:
       - run: |
           TESTFILES=src/test/resources/rtest/cluster_access.feature
           echo "export TESTFILES=${TESTFILES}" >> "$BASH_ENV"
+      - run: |
+          circleci tests run --command="mvn test"
 
-      - android/run-tests:
-              max-tries: 1
-              pre-test-command: eval echo $TESTFILES
-              test-command: circleci tests run --command="mvn test"
-              #eval mvn test -Dcucumber.features="$TESTFILES" -Dcucumber.filter.tags="@DryRun and @Full" 
+      # - android/run-tests:
+      #         max-tries: 1
+      #         pre-test-command: eval echo $TESTFILES
+      #         test-command: circleci tests run --command="mvn test"
+      #         #eval mvn test -Dcucumber.features="$TESTFILES" -Dcucumber.filter.tags="@DryRun and @Full" 
 
       # - run:
       #     name: Run CCM based tests
