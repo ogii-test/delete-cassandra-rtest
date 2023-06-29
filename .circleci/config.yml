@@ -15,7 +15,7 @@
 # Java Maven CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
-#
+# circleci tests run
 version: 2.1
 
 orbs:
@@ -51,6 +51,7 @@ jobs:
       MEDUSA_BRANCH: "master"
     steps:
       - checkout
+      - run: circleci tests run
       # - android/create-avd:
       #     avd-name: AndroidPhone_Pixel_3a
       #     install: true
