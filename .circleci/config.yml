@@ -51,7 +51,6 @@ jobs:
       MEDUSA_BRANCH: "master"
     steps:
       - checkout
-      - run: circleci tests run --command=
       # - android/create-avd:
       #     avd-name: AndroidPhone_Pixel_3a
       #     install: true
