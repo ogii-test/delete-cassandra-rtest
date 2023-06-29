@@ -51,7 +51,7 @@ jobs:
       MEDUSA_BRANCH: "master"
     steps:
       - checkout
-      - run: circleci tests run
+      - run: circleci tests run --command=
       # - android/create-avd:
       #     avd-name: AndroidPhone_Pixel_3a
       #     install: true
@@ -78,7 +78,7 @@ jobs:
       - android/run-tests:
               max-tries: 1
               pre-test-command: eval echo $TESTFILES
-              test-command: eval mvn test -Dcucumber.features="$TESTFILES" -D"cucumber.filter.tags=<< parameters.tags >>"
+              test-command: circleci tests run --command="mvn test -Dcucumber.features=src/test/resources/rtest/cluster_access.feature"
               #eval mvn test -Dcucumber.features="$TESTFILES" -Dcucumber.filter.tags="@DryRun and @Full" 
 
       # - run:
